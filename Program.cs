@@ -10,6 +10,11 @@ namespace InterviewQuestions
     {
         static void Main(string[] args)
         {
+            PerfectBinaryStringWithMinimumBitFlips TestPerfectBinaryString = new PerfectBinaryStringWithMinimumBitFlips();
+
+            Console.WriteLine("Minimum: " + Math.Min(TestPerfectBinaryString.CountFlipsWithStartingCharacter("0001010111", '0'), TestPerfectBinaryString.CountFlipsWithStartingCharacter("0001010111", '1')));
+            
+
             SolutionsCollection sol = new SolutionsCollection();
 
             // FindMinPositive(int[]) - smallest positive integer not existing in array
@@ -57,5 +62,52 @@ namespace InterviewQuestions
 
             return outStr;
         }
+    }
+    
+    // I like to be descriptive with my naming...
+    public class PerfectBinaryStringWithMinimumBitFlips
+    {
+        // Empty constructor; but here's the story:
+        public PerfectBinaryStringWithMinimumBitFlips()
+        {
+            /*
+             * We're trying to keep a binary string in an alternating format (e.g., 010101, 101010, etc.).
+             * We're given the task of trying to determine the minimum number of bit swaps it will take to maintain an alternating pattern.
+             * 
+             * Examples:
+             *      0101: output should be 0; this is in alternating format desired.
+             *      0011: output should be 1; we would swap index 0 and index 3 to get 1010.
+             * 
+             * Plan of action:
+             *      - Count number of 0s in odd index positions, store in OddIndex_0_Count; number of 0s in even index positions, store in EvenIndex_0_Count.
+             *      - Count number of 1s in odd index positions, store in OddIndex_1_Count; number of 1s in even index positions, store in EvenIndex_1_Count.
+             *      - Output:
+             *          - If input string starts with 0, return Math.Min(EvenIndex_0_Count, OddIndex_1_Count)
+             *          - If input string starts with 1, return Math.Min(OddIndex_0_Count, EvenIndex_1_Count)
+             */
+        }
+
+        public int CountFlipsWithStartingCharacter(String Str, char Expected)
+        {
+            int FlipCount = 0;
+
+            for(int i = 0; i < Str.Length; i++)
+            {
+                if(Str[i] != Expected)
+                {
+                    FlipCount++;
+                }
+
+                Expected = FlipBit(Expected);
+            }
+
+            return FlipCount;
+        }
+
+        public static char FlipBit(char ch)
+        {
+            return (ch == '0') ? '1' : '0';
+        }
+
     }
 }
