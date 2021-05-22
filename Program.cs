@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Inheritance;
 
 namespace InterviewQuestions
 {
@@ -10,6 +11,12 @@ namespace InterviewQuestions
     {
         static void Main(string[] args)
         {
+
+            Pet pet = new Cat();
+            Shape shape = new Ball();
+
+            Console.WriteLine(string.Format("My {0} is playing with a {1}", pet.GetName(), shape.GetName()));
+
             PerfectBinaryStringWithMinimumBitFlips TestPerfectBinaryString = new PerfectBinaryStringWithMinimumBitFlips();
 
             Console.WriteLine("Minimum: " + Math.Min(TestPerfectBinaryString.CountFlipsWithStartingCharacter("0001010111", '0'), TestPerfectBinaryString.CountFlipsWithStartingCharacter("0001010111", '1')));
@@ -110,4 +117,5 @@ namespace InterviewQuestions
         }
 
     }
+
 }
